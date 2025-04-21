@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rendez-vous Beauté - Ongles & Soins</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/main.min.css" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fff0f5;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #ff69b4;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    form {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 0.25rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background: #ff69b4;
+      color: white;
+      border: none;
+      padding: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1rem;
+      width: 100%;
+      font-weight: bold;
+    }
+    .tarifs {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+    .tarifs ul {
+      list-style: none;
+      padding: 0;
+    }
+    .tarifs li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #eee;
+    }
+    #calendar {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bienvenue chez Vincent Beauté</h1>
+    <p>Pose d'ongles & Soins des mains</p>
+  </header>
+
+  <main>
+    <section class="tarifs">
+      <h2>Tarifs</h2>
+      <ul>
+        <li><strong>Pose d'ongles classique :</strong> 40€</li>
+        <li><strong>Soin des mains complet :</strong> 30€</li>
+        <li><strong>Dépose + nouvelle pose :</strong> 50€</li>
+      </ul>
+    </section>
+
+    <h2>Réservez votre créneau</h2>
+    <div id="calendar"></div>
+
+    <h2>Prendre rendez-vous</h2>
+    <form action="https://formspree.io/f/ton_email" method="POST">
+      <label for="nom">Nom complet</label>
+      <input type="text" id="nom" name="nom" required>
+
+      <label for="email">Adresse email</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="service">Choisissez un service</label>
+      <select id="service" name="service">
+        <option value="pose_ongles">Pose d'ongles</option>
+        <option value="soin_mains">Soin des mains</option>
+        <option value="pose_et_depose">Dépose + nouvelle pose</option>
+      </select>
+
+      <label for="date">Date souhaitée</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="message">Message ou préférences</label>
+      <textarea id="message" name="message" rows="4"></textarea>
+
+      <button type="submit">Réserver</button>
+    </form>
+  </main>
+
+  <footer>
+    © 2025 Vincent Beauté - Tous droits réservés | Site hébergé sur <a href="https://www.netlify.com/" target="_blank">Netlify</a>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        selectable: true,
+        dateClick: function(info) {
+          document.getElementById('date').value = info.dateStr;
+          window.scrollTo({ top: document.querySelector('form').offsetTop - 100, behavior: 'smooth' });
+        }
+      });
+      calendar.render();
+    });
+  </script>
+</body>
+</html>
